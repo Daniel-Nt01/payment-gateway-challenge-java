@@ -1,22 +1,24 @@
 package com.checkout.payment.gateway.repository;
 
-import com.checkout.payment.gateway.model.PostPaymentResponse;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public class PaymentsRepository {
+import com.checkout.payment.gateway.model.Payment;
 
-  private final HashMap<UUID, PostPaymentResponse> payments = new HashMap<>();
+public interface PaymentsRepository {
 
-  public void add(PostPaymentResponse payment) {
-    payments.put(payment.getId(), payment);
-  }
-
-  public Optional<PostPaymentResponse> get(UUID id) {
-    return Optional.ofNullable(payments.get(id));
-  }
-
+	/**
+	 * Adds a new payment to the repository.
+	 *
+	 * @param payment the Payment object to be added
+	 */
+	void add(Payment payment);
+	
+	/**
+	 * Retrieves a payment by its unique identifier.
+	 *
+	 * @param id the unique identifier of the payment
+	 * @return an Optional containing the Payment object if found, or empty if not found
+	 */
+	Optional<Payment> get(UUID id);
 }
